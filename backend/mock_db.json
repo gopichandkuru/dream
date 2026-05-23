@@ -1,0 +1,11 @@
+[
+  {
+    "fullName": "Gopi Chandu",
+    "email": "gopichan55k@gmail.com",
+    "password": "$2b$12$BFFYE07ZMLb72ZzkuF6DA.jddczyyVWLtv9P99ZHAZa8/XrlX8Pf6",
+    "phoneNumber": null,
+    "authProvider": "local",
+    "isEmailVerified": true,
+    "_id": "mock_g6qvxhgd8b"
+  }
+]

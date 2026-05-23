@@ -1,0 +1,91 @@
+[
+  {
+    "id": "FB1779518036234944",
+    "customerName": "Gopi Chandu",
+    "rating": 4,
+    "reviewMessage": "it soo good",
+    "productId": "",
+    "productNames": [
+      "Scandinavian L-Sofa"
+    ],
+    "orderId": "ORD1779517987107",
+    "initials": "GC",
+    "createdAt": "2026-05-23T06:33:56.234Z"
+  },
+  {
+    "id": "FB1779273017436156",
+    "customerName": "lisz",
+    "rating": 4,
+    "reviewMessage": "it  is so good",
+    "productId": "",
+    "productNames": [
+      "Ceramic Vase Set",
+      "Glass & Steel Coffee Table"
+    ],
+    "orderId": "ORD1779272977954",
+    "initials": "L",
+    "createdAt": "2026-05-20T10:30:17.436Z"
+  },
+  {
+    "id": "FB1779182076085249",
+    "customerName": "Gopi Chandu",
+    "rating": 5,
+    "reviewMessage": "kwejsf kjhcib3333333333333333333",
+    "productId": "",
+    "productNames": [
+      "Modern Velvet Sofa"
+    ],
+    "orderId": "ORD1779182058287",
+    "initials": "GC",
+    "createdAt": "2026-05-19T09:14:36.085Z"
+  },
+  {
+    "id": "FB1779170390213947",
+    "customerName": "yyy lm",
+    "rating": 4,
+    "reviewMessage": "it is good",
+    "productId": "",
+    "productNames": [
+      "Designer Table Lamp"
+    ],
+    "orderId": "ORD1779170358925",
+    "initials": "YL",
+    "createdAt": "2026-05-19T05:59:50.213Z"
+  },
+  {
+    "id": "FB1779169448760638",
+    "customerName": "Rahul Sharma",
+    "rating": 5,
+    "reviewMessage": "Absolutely stunning furniture! The velvet sofa is beautiful and delivery was fast. Highly recommend!",
+    "productId": "",
+    "productNames": [],
+    "orderId": "",
+    "initials": "RS",
+    "createdAt": "2026-05-19T05:44:08.760Z"
+  },
+  {
+    "id": "FB1779169164131697",
+    "customerName": "Rahul Sharma",
+    "rating": 5,
+    "reviewMessage": "Absolutely stunning furniture! The velvet sofa is exactly what I wanted and delivery was on time. Highly recommend Dream D'Accor to everyone.",
+    "productId": "",
+    "productNames": [],
+    "orderId": "",
+    "initials": "RS",
+    "createdAt": "2026-05-19T05:39:24.131Z"
+  },
+  {
+    "id": "FB177916854826171",
+    "customerName": "Gopi Chand",
+    "rating": 5,
+    "reviewMessage": "Amazing furniture quality! The sofa looks exactly like the photo and delivery was super fast.",
+    "productId": "prod_001",
+    "productNames": [
+      "Luxe Velvet Sofa",
+      "Oak Coffee Table"
+    ],
+    "orderId": "ORD_TEST_001",
+    "initials": "GC",
+    "createdAt": "2026-05-19T05:29:08.261Z"
+  }
+]

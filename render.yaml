@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: dreamdaccor-backend
+    runtime: node
+    region: singapore
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /health
+
+    envVars:
+      # ── Server ──────────────────────────────────────────────────────────────
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+
+      # ── Razorpay LIVE Keys (set in Render dashboard as secrets) ─────────────
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+
+      # ── Email / Resend ───────────────────────────────────────────────────────
+      - key: RESEND_API_KEY
+        sync: false
+      - key: FROM_EMAIL
+        value: onboarding@resend.dev
+      - key: ADMIN_EMAIL
+        value: gopichand55k@gmail.com
+
+      # ── CORS: your Vercel frontend URL ───────────────────────────────────────
+      # Set this to your actual Vercel deployment URL, e.g.:
+      #   https://project-kcnom.vercel.app
+      - key: FRONTEND_URL
+        sync: false

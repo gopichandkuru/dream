@@ -1,0 +1,515 @@
+[
+  {
+    "orderId": "ORD1779108005109",
+    "customerDetails": {
+      "name": "Gopi Chandu",
+      "email": "gopi76202@gmail.com",
+      "phone": "9704491654",
+      "address": "kkh, Hyderabad, Telangana - 500032"
+    },
+    "products": [
+      {
+        "id": "9",
+        "name": "King Size Bed Frame",
+        "category": "Bedroom",
+        "price": 64999,
+        "rating": 4.9,
+        "reviews": 156,
+        "image": "https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=800&q=80",
+        "badge": "Premium",
+        "description": "Solid wood king-size bed frame with padded upholstered headboard.",
+        "quantity": 1
+      }
+    ],
+    "payment": {
+      "method": "cod",
+      "paymentId": "COD-1779108005053",
+      "transactionId": "COD-1779108005053",
+      "amount": 76699,
+      "status": "Pending"
+    },
+    "orderStatus": "Confirmed",
+    "createdAt": "2026-05-18T12:40:05.109Z"
+  },
+  {
+    "orderId": "ORD1779108012454",
+    "customerDetails": {
+      "name": "Gopi Chandu",
+      "email": "gopi76202@gmail.com",
+      "phone": "9704491654",
+      "address": "kkh, Hyderabad, Telangana - 500032"
+    },
+    "products": [
+      {
+        "id": "9",
+        "name": "King Size Bed Frame",
+        "category": "Bedroom",
+        "price": 64999,
+        "rating": 4.9,
+        "reviews": 156,
+        "image": "https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=800&q=80",
+        "badge": "Premium",
+        "description": "Solid wood king-size bed frame with padded upholstered headboard.",
+        "quantity": 1
+      }
+    ],
+    "payment": {
+      "method": "cod",
+      "paymentId": "COD-1779108012372",
+      "transactionId": "COD-1779108012372",
+      "amount": 76699,
+      "status": "Pending"
+    },
+    "orderStatus": "Confirmed",
+    "createdAt": "2026-05-18T12:40:12.454Z"
+  },
+  {
+    "orderId": "ORD1779108096897",
+    "customerDetails": {
+      "name": "Gopi Chandu",
+      "email": "gopi76202@gmail.com",
+      "phone": "9704491654",
+      "address": "kkh, Hyderabad, Telangana - 500032"
+    },
+    "products": [
+      {
+        "id": "9",
+        "name": "King Size Bed Frame",
+        "category": "Bedroom",
+        "price": 64999,
+        "rating": 4.9,
+        "reviews": 156,
+        "image": "https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=800&q=80",
+        "badge": "Premium",
+        "description": "Solid wood king-size bed frame with padded upholstered headboard.",
+        "quantity": 1
+      }
+    ],
+    "payment": {
+      "method": "cod",
+      "paymentId": "COD-1779108096816",
+      "transactionId": "COD-1779108096816",
+      "amount": 76699,
+      "status": "Pending"
+    },
+    "orderStatus": "Confirmed",
+    "createdAt": "2026-05-18T12:41:36.897Z"
+  },
+  {
+    "orderId": "ORD1779110500403",
+    "customerDetails": {
+      "name": "Gopi Chandu",
+      "email": "gopi76202@gmail.com",
+      "phone": "9704491654",
+      "address": "kkh, Hyderabad, Telangana - 500032"
+    },
+    "products": [
+      {
+        "id": "9",
+        "name": "King Size Bed Frame",
+        "category": "Bedroom",
+        "price": 64999,
+        "rating": 4.9,
+        "reviews": 156,
+        "image": "https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=800&q=80",
+        "badge": "Premium",
+        "description": "Solid wood king-size bed frame with padded upholstered headboard.",
+        "quantity": 1
+      }
+    ],
+    "payment": {
+      "method": "cod",
+      "paymentId": "COD-1779110500283",
+      "amount": 76699,
+      "status": "Pending (COD)"
+    },
+    "orderStatus": "Confirmed",
+    "createdAt": "2026-05-18T13:21:40.403Z"
+  },
+  {
+    "orderId": "ORD1779114580699",
+    "customerDetails": {
+      "name": "Gopi Chandu",
+      "email": "gopichand55k@gmail.com",
+      "phone": "9704491654",
+      "address": "Hyderabad, Hyderabad, Andhra Pradesh - 518466"
+    },
+    "products": [
+      {
+        "id": "10",
+        "name": "Pendant Light Fixture",
+        "category": "Lighting",
+        "price": 9999,
+        "rating": 4.7,
+        "reviews": 44,
+        "image": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=800&q=80",
+        "badge": null,
+        "description": "Industrial style brass pendant light. Makes a stunning statement above dining tables.",
+        "quantity": 3
+      }
+    ],
+    "payment": {
+      "method": "cod",
+      "paymentId": "COD-1779114580634",
+      "amount": 35396,
+      "status": "Pending (COD)"
+    },
+    "orderStatus": "Confirmed",
+    "createdAt": "2026-05-18T14:29:40.699Z"
+  },
+  {
+    "orderId": "ORD1779121409405",
+    "customerDetails": {
+      "name": "Gopi Chandu",
+      "email": "gopichand55k@gmail.com",
+      "phone": "9704491654",
+      "address": "Hyderabad, Hyderabad, Andhra Pradesh - 518466"
+    },
+    "products": [
+      {
+        "id": "2",
+        "name": "Minimal Arm Chair",
+        "category": "Living Room",
+        "price": 1,
+        "rating": 4.6,
+        "reviews": 87,
+        "image": "https://images.unsplash.com/photo-1598300056393-4aac492f4344?auto=format&fit=crop&w=800&q=80",
+        "badge": "New",
+        "description": "Elegant minimalist arm chair with premium fabric upholstery and ergonomic design.",
+        "quantity": 1
+      }
+    ],
+    "payment": {
+      "method": "cod",
+      "paymentId": "COD-1779121409292",
+      "amount": 500,
+      "status": "Pending (COD)"
+    },
+    "orderStatus": "Confirmed",
+    "createdAt": "2026-05-18T16:23:29.405Z"
+  },
+  {
+    "orderId": "ORD1779165701198",
+    "customerDetails": {
+      "name": "Gopi Chandu",
+      "email": "gopi76202@gmail.com",
+      "phone": "9704491654",
+      "address": "Hyderabad, Hyderabad, Telangana - 500032"
+    },
+    "products": [
+      {
+        "id": "2",
+        "name": "Minimal Arm Chair",
+        "category": "Living Room",
+        "price": 1,
+        "rating": 4.6,
+        "reviews": 87,
+        "image": "https://images.unsplash.com/photo-1598300056393-4aac492f4344?auto=format&fit=crop&w=800&q=80",
+        "badge": "New",
+        "description": "Elegant minimalist arm chair with premium fabric upholstery and ergonomic design.",
+        "quantity": 1
+      }
+    ],
+    "payment": {
+      "method": "razorpay",
+      "paymentId": "pay_Sr5upX3cG3QwPR",
+      "amount": 1,
+      "status": "Paid"
+    },
+    "orderStatus": "Confirmed",
+    "createdAt": "2026-05-19T04:41:41.198Z"
+  },
+  {
+    "orderId": "ORD1779167406745",
+    "customerDetails": {
+      "name": "Gopi Chandu",
+      "email": "gopichand55k@gmail.com",
+      "phone": "9704491654",
+      "address": "Hyderabad, Hyderabad, Andhra Pradesh - 500032"
+    },
+    "products": [
+      {
+        "id": "2",
+        "name": "Minimal Arm Chair",
+        "category": "Living Room",
+        "price": 1,
+        "rating": 4.6,
+        "reviews": 87,
+        "image": "https://images.unsplash.com/photo-1598300056393-4aac492f4344?auto=format&fit=crop&w=800&q=80",
+        "badge": "New",
+        "description": "Elegant minimalist arm chair with premium fabric upholstery and ergonomic design.",
+        "quantity": 1
+      }
+    ],
+    "payment": {
+      "method": "cod",
+      "paymentId": "COD-1779167406612",
+      "amount": 500,
+      "status": "Pending (COD)"
+    },
+    "orderStatus": "Confirmed",
+    "createdAt": "2026-05-19T05:10:06.745Z"
+  },
+  {
+    "orderId": "ORD1779167697534",
+    "customerDetails": {
+      "name": "shiv raj",
+      "email": "yashwanthchappa59@gmail.com",
+      "phone": "9704491654",
+      "address": "Hyderabad, kurnool, Telangana - 500032"
+    },
+    "products": [
+      {
+        "id": "4",
+        "name": "Abstract Wall Art",
+        "category": "Decor",
+        "price": 8499,
+        "rating": 4.7,
+        "reviews": 45,
+        "image": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=80",
+        "badge": "Limited",
+        "description": "Hand-crafted abstract canvas art. Museum quality print on premium canvas.",
+        "quantity": 1
+      }
+    ],
+    "payment": {
+      "method": "cod",
+      "paymentId": "COD-1779167697460",
+      "amount": 10029,
+      "status": "Pending (COD)"
+    },
+    "orderStatus": "Confirmed",
+    "createdAt": "2026-05-19T05:14:57.534Z"
+  },
+  {
+    "orderId": "ORD1779170358925",
+    "customerDetails": {
+      "name": "yyy lm",
+      "email": "gopi76202@gmail.com",
+      "phone": "8074045108",
+      "address": "KKH, Hyderbad, telangana - 500032"
+    },
+    "products": [
+      {
+        "id": "3",
+        "name": "Designer Table Lamp",
+        "category": "Lighting",
+        "price": 5499,
+        "rating": 4.5,
+        "reviews": 63,
+        "image": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=80",
+        "badge": null,
+        "description": "Contemporary table lamp with adjustable brightness and warm LED light.",
+        "quantity": 1
+      }
+    ],
+    "payment": {
+      "method": "cod",
+      "paymentId": "COD-1779170358898",
+      "amount": 6489,
+      "status": "Pending (COD)"
+    },
+    "orderStatus": "Confirmed",
+    "createdAt": "2026-05-19T05:59:18.925Z"
+  },
+  {
+    "orderId": "ORD1779182058287",
+    "customerDetails": {
+      "name": "Gopi Chandu",
+      "email": "gopichand55k@gmail.com",
+      "phone": "9704491654",
+      "address": "Hyderabad, Hyderabad, Andhra Pradesh - 500032"
+    },
+    "products": [
+      {
+        "id": "1",
+        "name": "Modern Velvet Sofa",
+        "category": "Living Room",
+        "price": 42999,
+        "rating": 4.8,
+        "reviews": 124,
+        "image": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80",
+        "badge": "Bestseller",
+        "description": "Luxurious velvet sofa with solid wood legs. Perfect centerpiece for modern living rooms.",
+        "quantity": 1
+      }
+    ],
+    "payment": {
+      "method": "cod",
+      "paymentId": "COD-1779182058078",
+      "amount": 50739,
+      "status": "Pending (COD)"
+    },
+    "orderStatus": "Confirmed",
+    "createdAt": "2026-05-19T09:14:18.287Z"
+  },
+  {
+    "orderId": "ORD1779214147893",
+    "customerDetails": {
+      "name": "Gopi Chandu",
+      "email": "gopi76202@gmail.com",
+      "phone": "8074045108",
+      "address": "KKH, Hyderbad, telangana - 500032"
+    },
+    "products": [
+      {
+        "id": "lr1",
+        "name": "Royal Velvet Sofa",
+        "category": "Living Room",
+        "subtype": "sofas",
+        "price": 54999,
+        "originalPrice": 68000,
+        "rating": 4.9,
+        "reviews": 312,
+        "badge": "Bestseller",
+        "inStock": true,
+        "isNew": false,
+        "image": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80",
+        "images": [
+          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=800&q=80"
+        ],
+        "description": "Luxurious velvet sofa with solid teak wood legs. 3-seater design with deep cushioning and premium fabric. A true centerpiece for modern living rooms.",
+        "quantity": 1
+      }
+    ],
+    "payment": {
+      "method": "cod",
+      "paymentId": "COD-1779214147362",
+      "amount": 64899,
+      "status": "Pending (COD)"
+    },
+    "orderStatus": "Confirmed",
+    "createdAt": "2026-05-19T18:09:07.893Z"
+  },
+  {
+    "orderId": "ORD1779214822862",
+    "customerDetails": {
+      "name": "Gopi Chandu",
+      "email": "gopichand55k@gmail.com",
+      "phone": "8074045108",
+      "address": "KKH, Hyderbad, telangana - 500032"
+    },
+    "products": [
+      {
+        "id": "lr3",
+        "name": "Walnut Coffee Table",
+        "category": "Living Room",
+        "subtype": "coffee tables",
+        "price": 24999,
+        "originalPrice": 31000,
+        "rating": 4.9,
+        "reviews": 201,
+        "badge": "Bestseller",
+        "inStock": true,
+        "isNew": false,
+        "image": "https://images.unsplash.com/photo-1611967164521-abae8fba4668?auto=format&fit=crop&w=800&q=80",
+        "images": [
+          "https://images.unsplash.com/photo-1611967164521-abae8fba4668?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=800&q=80"
+        ],
+        "description": "Solid walnut coffee table with elegant hairpin legs. Timeless design meets modern craftsmanship.",
+        "quantity": 1
+      }
+    ],
+    "payment": {
+      "method": "cod",
+      "paymentId": "COD-1779214822674",
+      "amount": 29499,
+      "status": "Pending (COD)"
+    },
+    "orderStatus": "Confirmed",
+    "createdAt": "2026-05-19T18:20:22.865Z"
+  },
+  {
+    "orderId": "ORD1779272977954",
+    "customerDetails": {
+      "name": "Gopi Chandu",
+      "email": "gopi76202@gmail.com",
+      "phone": "9704491654",
+      "address": "Hyderabad, Hyderabad, Andhra Pradesh - 500032"
+    },
+    "products": [
+      {
+        "id": "8",
+        "name": "Ceramic Vase Set",
+        "category": "Decor",
+        "price": 4299,
+        "rating": 4.5,
+        "reviews": 53,
+        "image": "https://images.unsplash.com/photo-1578500494198-246f612d3b3d?auto=format&fit=crop&w=800&q=80",
+        "badge": "New",
+        "description": "Set of 3 artisan ceramic vases in matte terracotta tones.",
+        "quantity": 1
+      },
+      {
+        "id": "lr4",
+        "name": "Glass & Steel Coffee Table",
+        "category": "Living Room",
+        "subtype": "coffee tables",
+        "price": 18999,
+        "originalPrice": 23000,
+        "rating": 4.6,
+        "reviews": 143,
+        "badge": null,
+        "inStock": true,
+        "isNew": true,
+        "image": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=800&q=80",
+        "images": [
+          "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1611967164521-abae8fba4668?auto=format&fit=crop&w=800&q=80"
+        ],
+        "description": "Contemporary tempered glass top coffee table with matte black steel frame. Sleek and modern.",
+        "quantity": 1
+      }
+    ],
+    "payment": {
+      "method": "cod",
+      "paymentId": "COD-1779272977811",
+      "amount": 27492,
+      "status": "Pending (COD)"
+    },
+    "orderStatus": "Confirmed",
+    "createdAt": "2026-05-20T10:29:37.954Z"
+  },
+  {
+    "orderId": "ORD1779517987107",
+    "customerDetails": {
+      "name": "Gopi Chandu",
+      "email": "gopichand55k@gmail.com",
+      "phone": "9704491654",
+      "address": "Hyderabad, Hyderabad, Andhra Pradesh - 500032"
+    },
+    "products": [
+      {
+        "id": "lr2",
+        "name": "Scandinavian L-Sofa",
+        "category": "Living Room",
+        "subtype": "sofas",
+        "price": 74999,
+        "originalPrice": 89999,
+        "rating": 4.7,
+        "reviews": 189,
+        "badge": "Premium",
+        "inStock": true,
+        "isNew": false,
+        "image": "https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea?auto=format&fit=crop&w=800&q=80",
+        "images": [
+          "https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80"
+        ],
+        "description": "Minimalist L-shaped sectional sofa with premium linen upholstery. Perfect for large living spaces.",
+        "quantity": 1
+      }
+    ],
+    "payment": {
+      "method": "cod",
+      "paymentId": "COD-1779517987003",
+      "amount": 88499,
+      "status": "Pending (COD)"
+    },
+    "orderStatus": "Confirmed",
+    "createdAt": "2026-05-23T06:33:07.107Z"
+  }
+]
