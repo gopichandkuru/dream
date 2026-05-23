@@ -1,0 +1,88 @@
+/* ─── Reviews Page ────────────────────────────────────────────────────────── */
+.reviews-page {
+  background: var(--color-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Page Hero ───────────────────────────────────────────────────────────── */
+.rv-page-hero {
+  padding: calc(var(--header-height) + 60px) 0 64px;
+  background: linear-gradient(
+    160deg,
+    var(--color-bg) 0%,
+    rgba(200, 169, 126, 0.06) 50%,
+    var(--color-bg) 100%
+  );
+  border-bottom: 1px solid var(--color-border);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative gold blur blob */
+.rv-page-hero::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(200, 169, 126, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.rv-page-hero-inner {
+  max-width: 640px;
+}
+
+.rv-page-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.rv-page-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.15;
+  margin-bottom: 18px;
+}
+
+.rv-page-subtitle {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  line-height: 1.75;
+  margin-bottom: 32px;
+  max-width: 520px;
+}
+
+.rv-page-cta-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .rv-page-hero {
+    padding: calc(var(--header-height) + 36px) 0 48px;
+  }
+  .rv-page-title {
+    font-size: 32px;
+  }
+  .rv-page-cta-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .rv-page-cta-row .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
