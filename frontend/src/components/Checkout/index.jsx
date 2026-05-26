@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Header from '../Header'
 import Footer from '../Footer'
 import { useCart } from '../../context/CartContext'
+import { useAuth } from '../../context/AuthContext'
 import toast from 'react-hot-toast'
 import './index.css'
 
@@ -14,6 +15,7 @@ const API_BASE = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
 // ─── Checkout Component ───────────────────────────────────────────────────────
 const Checkout = () => {
   const { cartItems, cartTotal, clearCart } = useCart()
+  const { token, user } = useAuth()
   const navigate = useNavigate()
 
   const [form, setForm] = useState({
@@ -59,7 +61,7 @@ const Checkout = () => {
   // ─── API: Place Order ─────────────────────────────────────────────────────
   const placeOrderViaAPI = async (paymentDetails = {}) => {
     const body = {
-      email: form.email,
+      email: form.email || user?.email || '',
       items: cartItems,
       totalAmount: grandTotal,
       customerName: `${form.firstName} ${form.lastName}`,
@@ -75,7 +77,10 @@ const Checkout = () => {
     try {
       const res = await fetch(`${API_BASE}/api/orders/place-order`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
         body: JSON.stringify(body),
       })
 
@@ -88,7 +93,7 @@ const Checkout = () => {
       }
 
       if (!res.ok || !data.success) {
-        throw new Error(data.message || `Server error ${res.status}`)
+        throw new Error(data.error || data.message || `Server error ${res.status}`)
       }
 
       return data

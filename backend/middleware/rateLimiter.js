@@ -6,14 +6,14 @@ const rateLimit = require("express-rate-limit")
  */
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10,
+  max: 50, // Increased from 10 — was locking out users on bad credentials
   message: {
     success: false,
     error: "Too many attempts. Please try again in 15 minutes.",
   },
   standardHeaders: true,
   legacyHeaders: false,
-  skipSuccessfulRequests: true, // Only count failed requests
+  skipSuccessfulRequests: true,
 })
 
 /**

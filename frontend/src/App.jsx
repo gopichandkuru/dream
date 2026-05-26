@@ -16,17 +16,15 @@ import OrderSuccess from './components/OrderSuccess'
 import Reviews from './components/Reviews'
 import ReviewsPage from './components/ReviewsPage'
 import ProtectedRoute from './components/ProtectedRoute'
+import AdminRoute from './components/AdminRoute'
 import NotFound from './components/NotFound'
 import ResetPassword from './pages/ResetPassword'
+import MyOrders from './components/MyOrders'
+import AdminDashboard from './pages/AdminDashboard'
 
-// ── Google Client ID — @react-oauth/google CRASHES if clientId is empty string.
-// Use a safe placeholder so the provider mounts without crashing.
-// Google Sign-In button is disabled at the UI level when no real clientId is set.
-const RAW_GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || ''
-const GOOGLE_CLIENT_ID = RAW_GOOGLE_CLIENT_ID.trim() || 'placeholder-no-google-oauth'
+const GOOGLE_CLIENT_ID = (import.meta.env.VITE_GOOGLE_CLIENT_ID || '').trim() || 'not-configured'
 
 const App = () => {
-  console.log("VITE_GOOGLE_CLIENT_ID loaded:", import.meta.env.VITE_GOOGLE_CLIENT_ID)
   return (
     <ErrorBoundary>
       <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
@@ -62,17 +60,21 @@ const App = () => {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/reset-password" element={<ResetPassword />} />
 
-            {/* Protected routes */}
-            <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-            <Route path="/shop" element={<ProtectedRoute><Shop /></ProtectedRoute>} />
-            <Route path="/collections" element={<ProtectedRoute><Collections /></ProtectedRoute>} />
-            <Route path="/favorites" element={<ProtectedRoute><Favorites /></ProtectedRoute>} />
-            <Route path="/contact" element={<ProtectedRoute><ContactDetails /></ProtectedRoute>} />
-            <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
-            <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
-            <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
+            {/* Protected routes — require login */}
+            <Route path="/home"         element={<ProtectedRoute><Home /></ProtectedRoute>} />
+            <Route path="/shop"         element={<ProtectedRoute><Shop /></ProtectedRoute>} />
+            <Route path="/collections"  element={<ProtectedRoute><Collections /></ProtectedRoute>} />
+            <Route path="/favorites"    element={<ProtectedRoute><Favorites /></ProtectedRoute>} />
+            <Route path="/contact"      element={<ProtectedRoute><ContactDetails /></ProtectedRoute>} />
+            <Route path="/about"        element={<ProtectedRoute><About /></ProtectedRoute>} />
+            <Route path="/cart"         element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+            <Route path="/checkout"     element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
             <Route path="/order-success" element={<ProtectedRoute><OrderSuccess /></ProtectedRoute>} />
-            <Route path="/reviews" element={<ProtectedRoute><ReviewsPage /></ProtectedRoute>} />
+            <Route path="/my-orders"    element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
+            <Route path="/reviews"      element={<ProtectedRoute><ReviewsPage /></ProtectedRoute>} />
+
+            {/* Admin-only route — require login + admin role */}
+            <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
 
             {/* 404 Page */}
             <Route path="*" element={<NotFound />} />

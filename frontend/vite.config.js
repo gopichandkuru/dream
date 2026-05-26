@@ -7,7 +7,16 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
 
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [
+      react(),
+      tailwindcss(),
+      {
+        name: 'keep-stdin-open',
+        configureServer() {
+          process.stdin.resume();
+        },
+      },
+    ],
     server: {
       // Dev proxy: routes /api/* → backend at localhost:5001
       // This is ONLY active in `npm run dev` — NOT in production builds

@@ -109,6 +109,18 @@
   .success-actions .btn { width: 100%; }
 }
 
+/* ---- PRODUCTS LIST ---- */
+.success-products {
+  width: 100%;
+  text-align: left;
+  padding: 12px 16px;
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+}
+.success-products-label { font-size: 12px; color: var(--color-text-muted); margin-bottom: 4px; font-weight: 500; }
+.success-products-list { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+
 /* ---- REVIEW PROMPT BANNER ---- */
 .success-review-prompt {
   width: 100%;

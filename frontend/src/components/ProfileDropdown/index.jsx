@@ -92,14 +92,19 @@ const ProfileDropdown = () => {
           <button className="profile-dropdown-item" onClick={() => handleNavigate('/home')}>
             🏠 Home
           </button>
+          {user.role === 'admin' && (
+            <button className="profile-dropdown-item" style={{ color: 'var(--color-accent)', fontWeight: 700 }} onClick={() => handleNavigate('/admin')}>
+              🛡️ Admin Panel
+            </button>
+          )}
+          <button className="profile-dropdown-item" onClick={() => handleNavigate('/my-orders')}>
+            📦 My Orders
+          </button>
           <button className="profile-dropdown-item" onClick={() => handleNavigate('/favorites')}>
             ♡ Wishlist
           </button>
           <button className="profile-dropdown-item" onClick={() => handleNavigate('/cart')}>
             🛍 My Cart
-          </button>
-          <button className="profile-dropdown-item" onClick={() => handleNavigate('/order-success')}>
-            📦 Orders
           </button>
 
           <div className="profile-dropdown-divider" />

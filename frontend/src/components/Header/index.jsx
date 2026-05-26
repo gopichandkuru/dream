@@ -43,12 +43,13 @@ const Header = () => {
   }
 
   const navLinks = [
-    { path: '/home', label: 'Home' },
-    { path: '/shop', label: 'Shop' },
+    { path: '/home',       label: 'Home' },
+    { path: '/shop',       label: 'Shop' },
     { path: '/collections', label: 'Collections' },
-    { path: '/reviews', label: '⭐ Reviews' },
-    { path: '/about', label: 'About' },
-    { path: '/contact', label: 'Contact' },
+    { path: '/my-orders',  label: '📦 My Orders', authOnly: true },
+    { path: '/reviews',    label: '⭐ Reviews' },
+    { path: '/about',      label: 'About' },
+    { path: '/contact',    label: 'Contact' },
   ]
 
   const isActive = (path) => location.pathname === path
@@ -64,7 +65,7 @@ const Header = () => {
 
         {/* Desktop Nav */}
         <nav className="nav-desktop">
-          {navLinks.map(link => (
+          {navLinks.filter(l => !l.authOnly || isAuthenticated).map(link => (
             <Link
               key={link.path}
               to={link.path}
@@ -203,6 +204,11 @@ const Header = () => {
 
         <div className="mobile-drawer-footer">
           <div className="mobile-actions">
+            {isAuthenticated && (
+              <Link to="/my-orders" className="mobile-action-item" onClick={() => setMenuOpen(false)}>
+                📦 My Orders
+              </Link>
+            )}
             <Link to="/favorites" className="mobile-action-item" onClick={() => setMenuOpen(false)}>
               ♡ Favorites ({favorites.length})
             </Link>

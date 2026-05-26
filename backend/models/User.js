@@ -84,9 +84,14 @@ const userSchema = new mongoose.Schema(
 
 // ── Hash password before saving ──────────────────────────────────────────────
 userSchema.pre("save", async function () {
-  // Only hash if password was modified (or is new)
-  if (!this.isModified("password") || !this.password) return
-  this.password = await bcrypt.hash(this.password, 12)
+  if (!this.password) return
+  
+  // Hash only if the password has been modified or is newly set, and is not already hashed
+  const isHashed = this.password.startsWith("$2a$") || this.password.startsWith("$2b$")
+  if (this.isModified("password") && !isHashed) {
+    console.log(`[User.js pre-save] Hashing password for user ${this.email}...`)
+    this.password = await bcrypt.hash(this.password, 12)
+  }
 })
 
 

@@ -1,8 +1,11 @@
 import { createContext, useContext, useState, useEffect, useCallback } from "react"
+import { useAuth } from "./AuthContext"
 
 const CartContext = createContext()
 
 export const CartProvider = ({ children }) => {
+  const { user, isAuthenticated, updateCart } = useAuth()
+  
   const [cartItems, setCartItems] = useState(() => {
     try {
       const saved = localStorage.getItem("dreamdecor_cart")
@@ -12,10 +15,28 @@ export const CartProvider = ({ children }) => {
     }
   })
 
-  // Persist to localStorage whenever cart changes
+  // Load cart from MongoDB when user logs in
+  useEffect(() => {
+    if (isAuthenticated && user && Array.isArray(user.cart)) {
+      setCartItems(user.cart)
+    } else if (!isAuthenticated) {
+      // Local storage fallback for guests
+      try {
+        const saved = localStorage.getItem("dreamdecor_cart")
+        setCartItems(saved ? JSON.parse(saved) : [])
+      } catch {
+        setCartItems([])
+      }
+    }
+  }, [isAuthenticated, user])
+
+  // Persist to localStorage and MongoDB when cartItems changes
   useEffect(() => {
     localStorage.setItem("dreamdecor_cart", JSON.stringify(cartItems))
-  }, [cartItems])
+    if (isAuthenticated) {
+      updateCart(cartItems)
+    }
+  }, [cartItems, isAuthenticated, updateCart])
 
   const addToCart = useCallback((item) => {
     setCartItems(prev => {

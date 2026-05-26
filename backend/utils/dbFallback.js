@@ -104,7 +104,8 @@ const dbFallback = (mongooseModel) => {
       const isConnected = mongoose.connection.readyState === 1
       
       if (isConnected) {
-        return Reflect.get(target, prop)
+        const val = Reflect.get(target, prop)
+        return typeof val === "function" ? val.bind(target) : val
       }
 
       console.log(`⚠️ MongoDB Atlas is not connected — falling back to mock database for ${prop}()`)

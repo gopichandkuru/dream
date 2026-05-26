@@ -22,22 +22,22 @@ const checkPasswordStrength = (pw) => {
   if (/[^A-Za-z0-9]/.test(pw)) score += 1
 
   let text = 'Weak'
-  let color = '#ef4444' // Red
+  let color = '#ef4444'
   let pct = 20
   if (score >= 4) {
     text = 'Strong'
-    color = '#10b981' // Green
+    color = '#10b981'
     pct = 100
   } else if (score >= 2) {
     text = 'Medium'
-    color = '#f59e0b' // Amber
+    color = '#f59e0b'
     pct = 60
   }
   return { score, text, color, pct }
 }
 
 const LoginForm = () => {
-  const { login, signup, verifyOtp, resendOtp, loginWithGoogle, isAuthenticated, loading: authLoading } = useAuth()
+  const { login, signup, loginWithGoogle, isAuthenticated, loading: authLoading } = useAuth()
   const navigate = useNavigate()
 
   // ── Panel mode: 'login' | 'signup' ───────────────────────────────────────
@@ -58,15 +58,6 @@ const LoginForm = () => {
   const [showSignupPw, setShowSignupPw] = useState(false)
   const [showSignupConfirm, setShowSignupConfirm] = useState(false)
 
-  // ── OTP verification state ───────────────────────────────────────────────
-  const [showOtpModal, setShowOtpModal] = useState(false)
-  const [otpEmail, setOtpEmail] = useState('')
-  const [otpCode, setOtpCode] = useState(['', '', '', '', '', ''])
-  const [otpLoading, setOtpLoading] = useState(false)
-  const [resendTimer, setResendTimer] = useState(0)
-  const [otpDevCode, setOtpDevCode] = useState('') // DEV MODE: OTP from server response
-  const [otpEmailSent, setOtpEmailSent] = useState(false) // Was email successfully sent?
-
   // ── Shared state ──────────────────────────────────────────────────────────
   const [loading, setLoading] = useState(false)
   const [googleLoading, setGoogleLoading] = useState(false)
@@ -79,14 +70,6 @@ const LoginForm = () => {
       navigate('/home', { replace: true })
     }
   }, [isAuthenticated, authLoading, navigate])
-
-  // ── OTP resend countdown timer ───────────────────────────────────────────
-  useEffect(() => {
-    if (resendTimer > 0) {
-      const timer = setTimeout(() => setResendTimer(resendTimer - 1), 1000)
-      return () => clearTimeout(timer)
-    }
-  }, [resendTimer])
 
   // ── Switch mode ───────────────────────────────────────────────────────────
   const switchMode = (newMode) => {
@@ -135,7 +118,7 @@ const LoginForm = () => {
     }
   }
 
-  // ── Submit Signup ─────────────────────────────────────────────────────────
+  // ── Submit Signup (Direct — No OTP) ──────────────────────────────────────
   const handleSignup = async (e) => {
     e.preventDefault()
     const errs = validateSignup()
@@ -143,7 +126,7 @@ const LoginForm = () => {
 
     setLoading(true)
     try {
-      const res = await signup({
+      const user = await signup({
         fullName: signupName.trim(),
         email: signupEmail.trim(),
         password: signupPassword,
@@ -151,36 +134,8 @@ const LoginForm = () => {
         phoneNumber: signupPhone.trim() || undefined,
       })
 
-      console.log('[Signup response]', res)
-
-      if (res.otpRequired) {
-        setOtpEmail(signupEmail.trim())
-        setOtpCode(['', '', '', '', '', ''])
-        setOtpEmailSent(res.emailSent !== false)
-        setOtpDevCode(res.devOtp || '')
-        setShowOtpModal(true)
-        setResendTimer(30)
-
-        // If devOtp available, auto-fill it
-        if (res.devOtp) {
-          const digits = res.devOtp.split('')
-          setOtpCode(digits)
-          console.log('[DEV] Auto-filling OTP from server:', res.devOtp)
-        }
-
-        if (res.emailSent) {
-          toast.success('Verification code sent! Check your email inbox.', { duration: 5000, icon: '📧' })
-        } else {
-          toast('Email delivery failed. OTP is auto-filled below (dev mode).', {
-            duration: 6000,
-            icon: '⚠️',
-            style: { background: '#f59e0b', color: '#1a1a1a' }
-          })
-        }
-      } else {
-        toast.success(`Welcome to Dream D'Accor! ✦`, { duration: 4000 })
-        navigate('/home')
-      }
+      toast.success(`Welcome to Dream D'Accor, ${user.fullName.split(' ')[0]}! ✦`, { duration: 4000 })
+      navigate('/home')
     } catch (err) {
       console.error('[Signup error]', err)
       toast.error(err.message || 'Signup failed. Please try again.')
@@ -189,64 +144,11 @@ const LoginForm = () => {
     }
   }
 
-  // ── Submit OTP Verification ──────────────────────────────────────────────
-  const handleOtpVerify = async (e) => {
-    e.preventDefault()
-    const code = otpCode.join('')
-    if (code.length < 6) {
-      toast.error('Please enter the 6-digit verification code.')
-      return
-    }
-
-    setOtpLoading(true)
-    try {
-      const user = await verifyOtp(otpEmail, code)
-      toast.success(`Email verified successfully! Welcome ${user.fullName.split(' ')[0]}! ✦`, { duration: 4000 })
-      setShowOtpModal(false)
-      navigate('/home')
-    } catch (err) {
-      toast.error(err.message || 'Verification failed. Please check the code.')
-    } finally {
-      setOtpLoading(false)
-    }
-  }
-
-  // ── Resend OTP ───────────────────────────────────────────────────────────
-  const handleResendOtp = async () => {
-    if (resendTimer > 0) return
-    try {
-      const res = await resendOtp(otpEmail)
-      console.log('[Resend OTP response]', res)
-      setResendTimer(30)
-      setOtpCode(['', '', '', '', '', ''])
-      setOtpEmailSent(res.emailSent !== false)
-
-      if (res.devOtp) {
-        setOtpDevCode(res.devOtp)
-        const digits = res.devOtp.split('')
-        setOtpCode(digits)
-        console.log('[DEV] New OTP from server:', res.devOtp)
-      }
-
-      if (res.emailSent) {
-        toast.success('New verification code sent to your email.')
-      } else {
-        toast('OTP regenerated (email failed). Check console or use auto-filled code.', {
-          icon: '⚠️',
-          style: { background: '#f59e0b', color: '#1a1a1a' }
-        })
-      }
-    } catch (err) {
-      toast.error(err.message || 'Failed to resend verification code.')
-    }
-  }
-
-  // ── Google Login (via access token flow) ──────────────────────────────────
+  // ── Google Login ──────────────────────────────────────────────────────────
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       setGoogleLoading(true)
       try {
-        // Send the access_token to backend — backend verifies with Google's userinfo endpoint
         const user = await loginWithGoogle(tokenResponse.access_token)
         toast.success(`Welcome, ${user.fullName.split(' ')[0]}! ✦`, { duration: 3000 })
         navigate('/home')
@@ -264,31 +166,10 @@ const LoginForm = () => {
   })
 
   const handleGoogleClick = () => {
-    const rawClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || ''
-    const trimmed = rawClientId.trim()
-    
-    // Detect fake/placeholder client IDs
-    const isFakePlaceholder = !trimmed ||
-      trimmed === 'placeholder-no-google-oauth' ||
-      trimmed.includes('a3d8b2e3c4d5e6f7') || // the fake one in .env
-      trimmed.length < 30
-
-    if (isFakePlaceholder) {
-      toast.error(
-        <div style={{ textAlign: 'left', lineHeight: 1.5 }}>
-          <strong style={{ display: 'block', marginBottom: '4px' }}>Google Sign-In Not Configured</strong>
-          <span style={{ fontSize: '12px', opacity: 0.9 }}>
-            Add a real <code>VITE_GOOGLE_CLIENT_ID</code> to <code>frontend/.env</code> and <code>GOOGLE_CLIENT_ID</code> to <code>backend/.env</code>, then restart both servers.
-          </span>
-        </div>,
-        { duration: 8000 }
-      )
-      return
-    }
     googleLogin()
   }
 
-  // Calculate password strength indicators
+  // Calculate password strength
   const strength = checkPasswordStrength(signupPassword)
 
   // ── Loading screen while checking session ─────────────────────────────────
@@ -306,7 +187,7 @@ const LoginForm = () => {
   return (
     <>
       <div className="login-page">
-        {/* ── Left panel - hero (Luxury Aesthetics) ── */}
+        {/* ── Left panel - hero ── */}
         <div className="login-hero">
           <div className="login-hero-bg">
             <img
@@ -582,7 +463,7 @@ const LoginForm = () => {
                     className="btn btn-accent login-submit-btn"
                     disabled={loading}
                   >
-                    {loading ? (<><span className="spinner" /> Creating account...</>) : 'Create Account →'}
+                    {loading ? (<><span className="spinner" /> Creating Account...</>) : 'Create Account →'}
                   </button>
                 </form>
 
@@ -618,106 +499,6 @@ const LoginForm = () => {
       {/* Forgot Password Modal */}
       {showForgotModal && (
         <ForgotPasswordModal onClose={() => setShowForgotModal(false)} />
-      )}
-
-      {/* OTP Verification Modal */}
-      {showOtpModal && (
-        <div className="otp-modal-overlay">
-          <div className="otp-modal-content">
-            <div className="otp-modal-header">
-              <span className="otp-modal-logo">✦</span>
-              <h2>Verify Your Email</h2>
-
-              {/* Email delivery status badge */}
-              {otpEmailSent ? (
-                <p>
-                  We sent a 6-digit code to{' '}<br />
-                  <strong style={{ color: 'var(--color-accent)' }}>{otpEmail}</strong>
-                  <br /><span style={{ fontSize: '12px', opacity: 0.7 }}>Check your inbox and spam folder.</span>
-                </p>
-              ) : (
-                <p>
-                  <span style={{ color: '#f59e0b' }}>⚠️ Email delivery failed.</span><br />
-                  <span style={{ fontSize: '13px', opacity: 0.8 }}>The code is auto-filled below (dev mode).</span>
-                </p>
-              )}
-
-              {/* DEV MODE: Show OTP clearly */}
-              {otpDevCode && (
-                <div style={{
-                  background: 'rgba(245,158,11,0.15)',
-                  border: '1px solid rgba(245,158,11,0.5)',
-                  borderRadius: '8px',
-                  padding: '8px 16px',
-                  marginTop: '8px',
-                  fontSize: '12px',
-                  color: '#f59e0b',
-                  letterSpacing: '0.04em'
-                }}>
-                  🛠 DEV: OTP = <strong style={{ fontSize: '18px', letterSpacing: '4px' }}>{otpDevCode}</strong>
-                </div>
-              )}
-            </div>
-
-            <form onSubmit={handleOtpVerify}>
-              <div className="otp-inputs">
-                {otpCode.map((digit, idx) => (
-                  <input
-                    key={idx}
-                    id={`otp-input-${idx}`}
-                    type="text"
-                    maxLength="1"
-                    pattern="[0-9]*"
-                    inputMode="numeric"
-                    value={digit}
-                    onChange={(e) => {
-                      const val = e.target.value
-                      if (/^[0-9]$/.test(val) || val === '') {
-                        const newOtp = [...otpCode]
-                        newOtp[idx] = val
-                        setOtpCode(newOtp)
-                        
-                        // Auto-focus next input
-                        if (val !== '' && idx < 5) {
-                          setTimeout(() => {
-                            document.getElementById(`otp-input-${idx + 1}`)?.focus()
-                          }, 10)
-                        }
-                      }
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Backspace' && otpCode[idx] === '' && idx > 0) {
-                        setTimeout(() => {
-                          document.getElementById(`otp-input-${idx - 1}`)?.focus()
-                        }, 10)
-                      }
-                    }}
-                    className="otp-input-box"
-                    autoFocus={idx === 0}
-                  />
-                ))}
-              </div>
-
-              <button type="submit" className="btn btn-accent otp-verify-btn" disabled={otpLoading}>
-                {otpLoading ? <span className="spinner" /> : 'Verify Code'}
-              </button>
-            </form>
-
-            <div className="otp-resend-row">
-              {resendTimer > 0 ? (
-                <span>Resend code in <strong>{resendTimer}s</strong></span>
-              ) : (
-                <button type="button" className="otp-resend-link" onClick={handleResendOtp}>
-                  Resend Code
-                </button>
-              )}
-            </div>
-
-            <button type="button" className="otp-cancel-btn" onClick={() => setShowOtpModal(false)}>
-              Cancel & Sign Up Again
-            </button>
-          </div>
-        </div>
       )}
     </>
   )

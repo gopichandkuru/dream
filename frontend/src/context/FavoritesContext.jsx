@@ -1,8 +1,11 @@
 import { createContext, useContext, useState, useEffect, useCallback } from "react"
+import { useAuth } from "./AuthContext"
 
 const FavoritesContext = createContext()
 
 export const FavoritesProvider = ({ children }) => {
+  const { user, isAuthenticated, updateWishlist } = useAuth()
+  
   const [favorites, setFavorites] = useState(() => {
     try {
       const saved = localStorage.getItem("dreamdecor_favorites")
@@ -12,9 +15,28 @@ export const FavoritesProvider = ({ children }) => {
     }
   })
 
+  // Load wishlist from MongoDB when user logs in
+  useEffect(() => {
+    if (isAuthenticated && user && Array.isArray(user.wishlist)) {
+      setFavorites(user.wishlist)
+    } else if (!isAuthenticated) {
+      // Local storage fallback for guests
+      try {
+        const saved = localStorage.getItem("dreamdecor_favorites")
+        setFavorites(saved ? JSON.parse(saved) : [])
+      } catch {
+        setFavorites([])
+      }
+    }
+  }, [isAuthenticated, user])
+
+  // Persist to localStorage and MongoDB when favorites changes
   useEffect(() => {
     localStorage.setItem("dreamdecor_favorites", JSON.stringify(favorites))
-  }, [favorites])
+    if (isAuthenticated) {
+      updateWishlist(favorites)
+    }
+  }, [favorites, isAuthenticated, updateWishlist])
 
   const addToFavorites = useCallback((item) => {
     setFavorites(prev => {

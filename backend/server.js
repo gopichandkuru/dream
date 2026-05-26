@@ -86,6 +86,9 @@ app.get("/health", (_req, res) => res.json({
 const authRoutes = require("./routes/authRoutes")
 app.use("/api/auth", authRoutes)
 
+const productRoutes = require("./routes/productRoutes")
+app.use("/api/products", productRoutes)
+
 const orderRoutes = require("./routes/orderRoutes")
 app.use("/api/orders", orderRoutes)
 
@@ -107,6 +110,30 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ success: false, message: err.message || "Internal server error" })
 })
 
+// ─── MongoDB Seeding ──────────────────────────────────────────────────────────
+const Product = require("./models/Product")
+const { getSeedProducts } = require("./utils/seedHelper")
+
+const seedProducts = async () => {
+  try {
+    const count = await Product.countDocuments()
+    if (count === 0) {
+      console.log("🌱 Database is empty. Seeding products...")
+      const products = getSeedProducts()
+      if (products && products.length > 0) {
+        await Product.insertMany(products)
+        console.log(`✅ Seeded ${products.length} products successfully!`)
+      } else {
+        console.warn("⚠️ No products found to seed.")
+      }
+    } else {
+      console.log(`ℹ️ Database already has ${count} products. Skipping seed.`)
+    }
+  } catch (err) {
+    console.error("❌ Failed to seed products:", err.message)
+  }
+}
+
 // ─── MongoDB Connection ───────────────────────────────────────────────────────
 const connectDB = async () => {
   const dbUrl = process.env.MONGO_URI || process.env.MONGO_URL
@@ -127,11 +154,12 @@ const connectDB = async () => {
 }
 
 // ─── Startup ──────────────────────────────────────────────────────────────────
-const PORT = process.env.PORT || 5001
+const PORT = process.env.PORT || 5002
 
 const startServer = async () => {
   // Connect DB first, then start listening
   await connectDB()
+  await seedProducts()
 
   app.listen(PORT, () => {
     console.log(`\n🚀 Server running on port ${PORT}`)

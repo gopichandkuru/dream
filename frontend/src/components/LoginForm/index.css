@@ -796,6 +796,59 @@
   line-height: 1.6;
 }
 
+/* ── OTP Countdown Timer ─────────────────────────────── */
+.otp-countdown-wrap {
+  margin: 16px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.otp-countdown-display {
+  font-size: 28px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 2px;
+  transition: color 0.5s ease;
+  font-family: 'Courier New', 'Roboto Mono', monospace;
+}
+
+.otp-countdown-display.time-ok   { color: var(--color-accent); }
+.otp-countdown-display.time-warn { color: #f59e0b; }
+.otp-countdown-display.time-low  { color: #ef4444; animation: urgentPulse 0.8s infinite; }
+
+@keyframes urgentPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.otp-progress-bar-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.otp-progress-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1s linear, background-color 0.5s ease;
+}
+
+.otp-progress-bar-fill.time-ok   { background: var(--color-accent); }
+.otp-progress-bar-fill.time-warn { background: #f59e0b; }
+.otp-progress-bar-fill.time-low  { background: #ef4444; }
+
+.otp-countdown-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── OTP Digit Inputs ─────────────────────────────────── */
 .otp-inputs {
   display: flex;
   justify-content: space-between;
