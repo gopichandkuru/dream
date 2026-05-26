@@ -149,7 +149,7 @@ const startServer = async () => {
   app.listen(PORT, () => {
     console.log(`\n🚀 Server running on port ${PORT}`)
     console.log(`   NODE_ENV:        ${process.env.NODE_ENV || "development"}`)
-    console.log(`   Allowed origins: ${rawOrigins.join(", ")}`)
+    console.log("   CORS configured successfully")
     console.log(`   MongoDB:         ${mongoose.connection.readyState === 1 ? "✅ connected" : "⚠️  not connected"}`)
     console.log(`   JWT:             ${process.env.JWT_SECRET ? "✅ configured" : "❌ NOT SET (auth won't work)"}`)
     console.log(`   Google OAuth:    ${process.env.GOOGLE_CLIENT_ID ? "✅ configured" : "⚠️  not configured (optional)"}`)
