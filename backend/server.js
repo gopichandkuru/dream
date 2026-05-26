@@ -27,26 +27,11 @@ app.use(helmet({
 }))
 
 // ─── CORS ────────────────────────────────────────────────────────────────────
-const rawOrigins = (process.env.FRONTEND_URL || "http://localhost:5173,http://localhost:5174")
-  .split(",")
-  .map(o => o.trim().replace(/\/$/, ""))
-
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true)
-    const isAllowed = rawOrigins.some(allowed => {
-      if (origin === allowed) return true
-      if (allowed.startsWith("https://") && origin.endsWith(".vercel.app")) return true
-      return false
-    })
-    if (isAllowed) return callback(null, true)
-    console.warn("[cors] Blocked origin:", origin)
-    callback(new Error("Not allowed by CORS: " + origin))
-  },
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-}))
+  origin: "https://dream-1-w30n.onrender.com",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
 // ─── Body Parsers ─────────────────────────────────────────────────────────────
 app.use(express.json({ limit: "10mb" }))
