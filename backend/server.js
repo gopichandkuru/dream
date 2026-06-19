@@ -27,8 +27,20 @@ app.use(helmet({
 }))
 
 // ─── CORS ────────────────────────────────────────────────────────────────────
+const allowedOrigins = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(",").map(url => url.trim())
+  : ["https://dream-1-w30n.onrender.com"];
+
 app.use(cors({
-  origin: "https://dream-1-w30n.onrender.com",
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, postman or curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin) || allowedOrigins.includes("*")) {
+      return callback(null, true);
+    }
+    console.warn(`[CORS Blocked] Origin: ${origin}. Allowed Origins: ${allowedOrigins.join(", ")}`);
+    return callback(new Error(`Not allowed by CORS: ${origin}`), false);
+  },
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));

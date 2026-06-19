@@ -293,11 +293,48 @@
   .hamburger { display: flex; }
   .mobile-overlay { display: block; }
 }
+
 @media (max-width: 768px) {
   .header-actions { gap: 2px; }
   .action-btn { width: 38px; height: 38px; }
+  
+  /* Hide theme button in the header actions since it is in the drawer */
+  .header-actions .theme-btn {
+    display: none;
+  }
+  
+  /* Hide location city text, keeping only the pin icon */
+  .header-actions .loc-btn .header-loc-city {
+    display: none !important;
+  }
 }
+
 @media (max-width: 480px) {
   .logo { font-size: 18px; }
   .mobile-drawer { width: 280px; }
+  
+  /* Hide favorites button in header since it's in drawer */
+  .header-actions .fav-btn {
+    display: none;
+  }
+  
+  /* Reduce gap in header inner and actions */
+  .header-inner {
+    gap: 8px;
+  }
+  .header-actions {
+    gap: 2px;
+  }
+}
+
+@media (max-width: 320px) {
+  /* Hide location button entirely */
+  .header-actions .loc-btn {
+    display: none;
+  }
+  
+  /* Adjust logo font-size slightly */
+  .logo {
+    font-size: 16px;
+  }
 }

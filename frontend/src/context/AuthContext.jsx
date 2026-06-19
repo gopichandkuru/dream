@@ -35,7 +35,11 @@ const rawFetch = async (endpoint, options = {}) => {
   }
 
   try {
-    const res = await fetch(`${API_BASE}${endpoint}`, { ...options, headers })
+    const res = await fetch(`${API_BASE}${endpoint}`, {
+      credentials: 'include',
+      ...options,
+      headers,
+    })
     let data = {}
     const ct = res.headers.get('content-type') || ''
     if (ct.includes('application/json')) {
@@ -239,7 +243,8 @@ export const AuthProvider = ({ children }) => {
     console.log(`[AuthContext State] 👤 User: ${user?.email || 'Guest'} | 🔑 Token: ${token ? token.slice(0, 15) + '...' : 'None'} | 🛡️ Authenticated: ${isAuthenticated} | ⏳ Loading: ${loading}`)
   }, [user, token, isAuthenticated, loading])
 
-  if (process.env.NODE_ENV !== 'production') {
+  const isDev = import.meta.env.DEV || (typeof process !== 'undefined' && process.env?.NODE_ENV !== 'production')
+  if (isDev) {
     // Debug helper visible in browser console
     window.__auth = { isAuthenticated, user, token: token?.slice(0, 30) + '...' }
   }

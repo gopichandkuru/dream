@@ -4,7 +4,7 @@ export const productData = [
     image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80",
     images: ["https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80","https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea?auto=format&fit=crop&w=800&q=80","https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=800&q=80"],
     description: "Luxurious velvet sofa with solid teak wood legs. 3-seater design with deep cushioning and premium fabric. A true centerpiece for modern living rooms." },
-  { id: "lr2", name: "Scandinavian L-Sofa", category: "Living Room", subtype: "sofas", price: 74999, originalPrice: 89999, rating: 4.7, reviews: 189, badge: "Premium", inStock: true, isNew: false,
+  { id: "lr2", name: "Scandinavian L-Sofa", category: "Living Room", subtype: "sofas", price: 2, originalPrice: 89999, rating: 4.7, reviews: 189, badge: "Premium", inStock: true, isNew: false,
     image: "https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea?auto=format&fit=crop&w=800&q=80",
     images: ["https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea?auto=format&fit=crop&w=800&q=80","https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80"],
     description: "Minimalist L-shaped sectional sofa with premium linen upholstery. Perfect for large living spaces." },
