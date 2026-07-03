@@ -11,7 +11,8 @@ if (process.env.NODE_ENV === "production") {
     GOOGLE_CLIENT_ID: "272588106203-rdii3ev0mcgomcuqehr6s8fs519qtgsf.apps.googleusercontent.com",
     FRONTEND_URL: "https://dream-1-w30n.onrender.com,https://dream-two-jet.vercel.app",
     RESEND_API_KEY: "re_gjj8ENJn_DMCN1SxBATze2zNZe7Pie5R6",
-    RAZORPAY_KEY_ID: "rzp_live_Sqv3lGkNWAMApa",
+    RAZORPAY_KEY_ID: "rzp_live_T97vtgY1z370Nx",
+    RAZORPAY_KEY_SECRET: "l6Jtp6bRRvTJdS5SEA0kvz48",
     ADMIN_EMAIL: "gopichand55k@gmail.com",
   }
   for (const [key, val] of Object.entries(prodDefaults)) {

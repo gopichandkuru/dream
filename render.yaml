@@ -35,11 +35,11 @@ services:
       - key: FRONTEND_URL
         value: https://dream-1-w30n.onrender.com,https://dream-two-jet.vercel.app
 
-      # ── Razorpay LIVE Keys ────────────────────────────────────────────────────
+      # ── Razorpay LIVE Keys ────────────────────────────────────────────────────────
       - key: RAZORPAY_KEY_ID
-        value: rzp_live_Sqv3lGkNWAMApa
+        value: rzp_live_T97vtgY1z370Nx
       - key: RAZORPAY_KEY_SECRET
-        sync: false
+        value: l6Jtp6bRRvTJdS5SEA0kvz48
 
       # ── Email / Resend ────────────────────────────────────────────────────────
       - key: RESEND_API_KEY
