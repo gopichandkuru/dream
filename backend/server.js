@@ -1,5 +1,27 @@
 require("dotenv").config({ quiet: true })
 
+// ─── Production Environment Fallback ─────────────────────────────────────────
+// Inject required variables that were not set via Render dashboard.
+// This ensures the server always starts correctly in production.
+if (process.env.NODE_ENV === "production") {
+  const prodDefaults = {
+    MONGO_URL: "mongodb+srv://chand55k_db_user:CHAND@cluster232.wnjpy8y.mongodb.net/dreamdaccor?retryWrites=true&w=majority&appName=Cluster232",
+    JWT_SECRET: "8ce4286bc8a4f05dffb5cc693ed16100fdfec841a50865daf38d1928c8a34ee27b02fb19e485782ea46847fa8f7de84138a276f8918775a88a24b0c66f942e00",
+    JWT_EXPIRES_IN: "7d",
+    GOOGLE_CLIENT_ID: "272588106203-rdii3ev0mcgomcuqehr6s8fs519qtgsf.apps.googleusercontent.com",
+    FRONTEND_URL: "https://dream-1-w30n.onrender.com,https://dream-two-jet.vercel.app",
+    RESEND_API_KEY: "re_gjj8ENJn_DMCN1SxBATze2zNZe7Pie5R6",
+    RAZORPAY_KEY_ID: "rzp_live_Sqv3lGkNWAMApa",
+    ADMIN_EMAIL: "gopichand55k@gmail.com",
+  }
+  for (const [key, val] of Object.entries(prodDefaults)) {
+    if (!process.env[key]) {
+      process.env[key] = val
+      console.log(`[config] Injected missing env var: ${key}`)
+    }
+  }
+}
+
 const dns = require("dns")
 // Set default fallback DNS servers to resolve MongoDB Atlas SRV connection strings.
 // This prevents 'querySrv ECONNREFUSED' errors in Node.js.
