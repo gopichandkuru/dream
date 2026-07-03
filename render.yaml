@@ -34,6 +34,22 @@ services:
       # ── CORS: your frontend URL ──────────────────────────────────────────────
       - key: FRONTEND_URL
         sync: false
+      - key: CLIENT_URL
+        sync: false
+
+      # ── Database & Auth Secrets (set in Render dashboard) ────────────────────
+      - key: MONGO_URL
+        sync: false
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
 
   # ── Frontend Static Site ─────────────────────────────────────────────────────
   - type: web

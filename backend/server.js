@@ -27,8 +27,8 @@ app.use(helmet({
 }))
 
 // ─── CORS ────────────────────────────────────────────────────────────────────
-const allowedOrigins = process.env.FRONTEND_URL
-  ? process.env.FRONTEND_URL.split(",").map(url => url.trim())
+const allowedOrigins = (process.env.FRONTEND_URL || process.env.CLIENT_URL)
+  ? (process.env.FRONTEND_URL || process.env.CLIENT_URL).split(",").map(url => url.trim())
   : ["https://dream-1-w30n.onrender.com"];
 
 app.use(cors({
@@ -36,6 +36,12 @@ app.use(cors({
     // Allow requests with no origin (like mobile apps, postman or curl)
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin) || allowedOrigins.includes("*")) {
+      return callback(null, true);
+    }
+    // Robust fallback: allow local development and typical deploy platforms (Render & Vercel)
+    const isLocalhost = /^https?:\/\/localhost(:\d+)?$/.test(origin);
+    const isRenderOrVercel = /\.onrender\.com$/.test(origin) || /\.vercel\.app$/.test(origin);
+    if (isLocalhost || isRenderOrVercel) {
       return callback(null, true);
     }
     console.warn(`[CORS Blocked] Origin: ${origin}. Allowed Origins: ${allowedOrigins.join(", ")}`);
@@ -133,7 +139,7 @@ const seedProducts = async () => {
 
 // ─── MongoDB Connection ───────────────────────────────────────────────────────
 const connectDB = async () => {
-  const dbUrl = process.env.MONGO_URI || process.env.MONGO_URL
+  const dbUrl = process.env.MONGODB_URI || process.env.MONGO_URI || process.env.MONGO_URL
   if (!dbUrl) {
     console.warn("⚠️  MONGO_URI or MONGO_URL not set — running without database (auth disabled)")
     return

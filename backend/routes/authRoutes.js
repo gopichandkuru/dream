@@ -11,7 +11,7 @@ const { protect, adminOnly } = require("../middleware/auth")
 const { authLimiter, forgotPasswordLimiter } = require("../middleware/rateLimiter")
 
 const router = express.Router()
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 const googleClient = process.env.GOOGLE_CLIENT_ID
   ? new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
   : null
@@ -459,51 +459,55 @@ router.post(
       user.resetPasswordExpires = new Date(Date.now() + 60 * 60 * 1000)
       await user.save()
 
-      const frontendUrl = process.env.FRONTEND_URL
-        ? process.env.FRONTEND_URL.split(",")[0].trim()
+      const frontendUrl = (process.env.FRONTEND_URL || process.env.CLIENT_URL)
+        ? (process.env.FRONTEND_URL || process.env.CLIENT_URL).split(",")[0].trim()
         : "http://localhost:5173"
       const resetUrl = `${frontendUrl}/reset-password?token=${rawToken}`
 
       const fromAddress = process.env.FROM_EMAIL || "Dream D'Accor <onboarding@resend.dev>"
-      const { error } = await resend.emails.send({
-        from: fromAddress,
-        to: user.email,
-        subject: "Dream D'Accor — Reset Your Password",
-        html: `
-          <div style="font-family: 'Inter', Arial, sans-serif; max-width: 560px; margin: 0 auto; background: #faf9f6; border-radius: 16px; overflow: hidden;\">
-            <div style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); padding: 40px 48px; text-align: center;\">
-              <p style="color: #c8a97e; font-size: 24px; font-weight: 700; margin: 0; letter-spacing: 0.02em;\">✦ Dream D'Accor</p>
-              <p style="color: rgba(255,255,255,0.6); margin: 8px 0 0; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;\">Password Reset</p>
-            </div>
-            <div style="padding: 40px 48px;\">
-              <h2 style="font-size: 22px; color: #1a1a1a; margin: 0 0 16px;\">Hello, ${user.fullName}!</h2>
-              <p style="color: #555; line-height: 1.7; margin: 0 0 24px;\">
-                We received a request to reset the password for your Dream D'Accor account. 
-                Click the button below to set a new password.
-              </p>
-              <div style="text-align: center; margin: 32px 0;\">
-                <a href="${resetUrl}" 
-                   style="display: inline-block; background: linear-gradient(135deg, #c8a97e 0%, #e8c99e 50%, #a8834e 100%); 
-                          color: #fff; text-decoration: none; padding: 16px 40px; border-radius: 9999px; 
-                          font-weight: 600; font-size: 15px; letter-spacing: 0.02em;\">
-                  Reset My Password
-                </a>
+      if (resend) {
+        const { error } = await resend.emails.send({
+          from: fromAddress,
+          to: user.email,
+          subject: "Dream D'Accor — Reset Your Password",
+          html: `
+            <div style="font-family: 'Inter', Arial, sans-serif; max-width: 560px; margin: 0 auto; background: #faf9f6; border-radius: 16px; overflow: hidden;">
+              <div style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); padding: 40px 48px; text-align: center;">
+                <p style="color: #c8a97e; font-size: 24px; font-weight: 700; margin: 0; letter-spacing: 0.02em;">✦ Dream D'Accor</p>
+                <p style="color: rgba(255,255,255,0.6); margin: 8px 0 0; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;">Password Reset</p>
               </div>
-              <p style="color: #999; font-size: 13px; text-align: center; margin: 0 0 8px;\">
-                This link expires in <strong>1 hour</strong>.
-              </p>
-              <p style="color: #999; font-size: 13px; text-align: center;\">
-                If you didn't request a password reset, you can safely ignore this email.
-              </p>
+              <div style="padding: 40px 48px;">
+                <h2 style="font-size: 22px; color: #1a1a1a; margin: 0 0 16px;">Hello, ${user.fullName}!</h2>
+                <p style="color: #555; line-height: 1.7; margin: 0 0 24px;">
+                  We received a request to reset the password for your Dream D'Accor account. 
+                  Click the button below to set a new password.
+                </p>
+                <div style="text-align: center; margin: 32px 0;">
+                  <a href="${resetUrl}" 
+                     style="display: inline-block; background: linear-gradient(135deg, #c8a97e 0%, #e8c99e 50%, #a8834e 100%); 
+                            color: #fff; text-decoration: none; padding: 16px 40px; border-radius: 9999px; 
+                            font-weight: 600; font-size: 15px; letter-spacing: 0.02em;">
+                    Reset My Password
+                  </a>
+                </div>
+                <p style="color: #999; font-size: 13px; text-align: center; margin: 0 0 8px;">
+                  This link expires in <strong>1 hour</strong>.
+                </p>
+                <p style="color: #999; font-size: 13px; text-align: center;">
+                  If you didn't request a password reset, you can safely ignore this email.
+                </p>
+              </div>
+              <div style="background: #f3f1ec; padding: 20px 48px; text-align: center;">
+                <p style="color: #aaa; font-size: 12px; margin: 0;">© ${new Date().getFullYear()} Dream D'Accor. All rights reserved.</p>
+              </div>
             </div>
-            <div style="background: #f3f1ec; padding: 20px 48px; text-align: center;\">
-              <p style="color: #aaa; font-size: 12px; margin: 0;\">© ${new Date().getFullYear()} Dream D'Accor. All rights reserved.</p>
-            </div>
-          </div>
-        `,
-      })
+          `,
+        })
 
-      if (error) console.error("[forgot-password email]", error)
+        if (error) console.error("[forgot-password email]", error)
+      } else {
+        console.warn("[forgot-password] Resend API key is not configured. Hashed token URL (dev/test):", resetUrl)
+      }
 
       res.json({ success: true, message: "If that email exists, a reset link has been sent." })
     } catch (err) {
