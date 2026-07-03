@@ -2,6 +2,7 @@ require("dotenv").config()
 const express = require("express")
 const { body, validationResult } = require("express-validator")
 const crypto = require("crypto")
+const mongoose = require("mongoose")
 const { OAuth2Client } = require("google-auth-library")
 const { Resend } = require("resend")
 
@@ -183,6 +184,15 @@ router.post(
 // ══════════════════════════════════════════════════════════════════════════════
 router.post("/google", authLimiter, async (req, res) => {
   try {
+    // Guard: database must be connected before we can create/find users
+    if (mongoose.connection.readyState !== 1) {
+      console.error("[google auth] MongoDB is disconnected — cannot authenticate")
+      return res.status(503).json({
+        success: false,
+        error: "Database unavailable. The server is not connected to MongoDB. Please try again in a moment.",
+      })
+    }
+
     const { idToken, accessToken } = req.body
     const token = idToken || accessToken
 
